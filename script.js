@@ -31,11 +31,12 @@ window.addEventListener("load", function() {
     let cargoMass = document.querySelector("input[name=cargoMass]");
     let pilotStatus = document.getElementById("pilotStatus");
     let copilotStatus= document.getElementById("copilotStatus");
-    let cargoStatus = document.getElementById("cargoStatus")
-    if (pilotName.value === "" || copilotName.value === ""||fuelLevel=== ""|| cargoMass === ""){
-      alert("all fields are required")
-    }
-    else if (isNaN(pilotName.value)=== false || isNaN(copilotName.value) === false){
+    let cargoStatus = document.getElementById("cargoStatus");
+    let fuelStatus = document.getElementById("fuelStatus");
+    //if (pilotName.value === "" || copilotName.value === ""||fuelLevel=== ""|| cargoMass === ""){
+      //alert("all fields are required")
+    //}
+     if (isNaN(pilotName.value)=== false || isNaN(copilotName.value) === false){
      alert("Should not be a number");
      console.log(isNaN(pilotName.value));
     } 
@@ -43,6 +44,10 @@ window.addEventListener("load", function() {
        alert("Not a number");
     } 
     else {
+      alert("All fields are required")
+    }
+      
+      
       let faultyItems = document.getElementById("faultyItems")
                  
       if(fuelLevel.value < 10000){
@@ -55,18 +60,21 @@ window.addEventListener("load", function() {
          launchStatus.style.color = "red";
         }    
        
-        if(cargoStatus.value > 10000){
-          //faultyItems.style.visibility = "visible";
+        if(cargoMass.value > 10000){
+          faultyItems.style.visibility = "visible";
           cargoStatus.innerHTML = "There is too much mass for the shuttle to take off";
           launchStatus.innerHTML = "Shuttle not ready for launch";
-          //faultyItems.style.color = "red";
+          faultyItems.style.color = "red";
         }
         
         else {
           launchStatus.style.color = " green";
           launchStatus.innerHTML = "Shuttle is ready for launch"
+          cargoStatus.innerHTML = "Cargo mass low enough for launch"
+          fuelStatus.innerHTML = "Fuel level high enough for launch"
+
         }
-    }           
+              
   });      
     
 });
