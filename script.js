@@ -1,33 +1,75 @@
 // Write your JavaScript code here!
-let missionTarget = document.getElementById("missionTarget");
-let launchForm = document.getElementById("launchForm");
-let launchStatusCheck = document.getElementById("launchStatusCheck");
-// let pilotName = document.querySelector("input[name=pilotName]");
-//     let copilotName = document.querySelector("input[name=copilotName]");
-//     let fuelLevel = document.querySelector("input[name=fuelLevel]");
-//     let cargoMass = document.querySelector("input[name=cargoMass]");
-let button = document.getElementById("formSubmit");
+
 
 window.addEventListener("load", function() {
- let form = document.querySelector("form");
+  fetch("https://handlers.education.launchcode.org/static/planets.json").then (function(response){ 
+    response.json().then(function(json){
+      missionTarget.innerHTML = `<h2>Mission Destination</h2>
+      <ol>
+         <li>Name: ${json[2].name}</li>
+         <li>Diameter: ${json[2].diameter}</li>
+         <li>Star: ${json[2].star}</li>
+         <li>Distance from Earth: ${json[2].distance}</li>
+         <li>Number of Moons: ${json[2].moons}</li>
+      </ol>
+      <img src="${json[2].image}">
+      `;
+    });
+  });
+  let missionTarget = document.getElementById("missionTarget");
+  let launchForm = document.getElementById("launchForm");
+  let launchStatusCheck = document.getElementById("launchStatusCheck");
+  let form = document.querySelector("form");
   let button = document.getElementById("formSubmit");
    button.addEventListener("click", function(event){
      event.preventDefault();
-    let pilotName = document.getElementById("pilotName");
+   let pilotName = document.querySelector("input[name=pilotName]");
     console.log(pilotName.value);
     let copilotName = document.querySelector("input[name=copilotName]");
     console.log(copilotName.value);
-    form.addEventListener("submit", function(event){
-      event.preventDefault();
-    if (isNaN(pilotName.value) || isNaN(copilotName.value)){
-      console.log(pilotName.value);
-    } else if (fuelLevel.value !== Number || cargoMass.value !== Number){
-      alert("Not a number");
-    } else {
-      alert("All fields are required!");
-    };            
-          
+    let fuelLevel = document.querySelector("input[name=fuelLevel]");
+    let cargoMass = document.querySelector("input[name=cargoMass]");
+    let pilotStatus = document.getElementById("pilotStatus");
+    let copilotStatus= document.getElementById("copilotStatus");
+    let cargoStatus = document.getElementById("cargoStatus")
+    if (pilotName.value === "" || copilotName.value === ""||fuelLevel=== ""|| cargoMass === ""){
+      alert("all fields are required")
+    }
+    else if (isNaN(pilotName.value)=== false || isNaN(copilotName.value) === false){
+     alert("Should not be a number");
+     console.log(isNaN(pilotName.value));
+    } 
+    else if (isNaN(fuelLevel.value) || isNaN(cargoMass.value)){
+       alert("Not a number");
+    } 
+    else {
+      let faultyItems = document.getElementById("faultyItems")
+                 
+      if(fuelLevel.value < 10000){
+        pilotStatus.innerHTML = `Pilot ${pilotName.value} is ready`;
+        copilotStatus.innerHTML = `Co-Pilot ${copilotName.value} is ready`;
+           // faultyItems.style.color = "red";
+            faultyItems.style.visibility = "visible";
+         fuelStatus.innerHTML = "There is not enough fuel for the journey";
+         launchStatus.innerHTML = "Shuttle not ready for launch";
+         launchStatus.style.color = "red";
+        }    
+       
+        if(cargoStatus.value > 10000){
+          //faultyItems.style.visibility = "visible";
+          cargoStatus.innerHTML = "There is too much mass for the shuttle to take off";
+          launchStatus.innerHTML = "Shuttle not ready for launch";
+          //faultyItems.style.color = "red";
+        }
+        
+        else {
+          launchStatus.style.color = " green";
+          launchStatus.innerHTML = "Shuttle is ready for launch"
+        }
+    }           
+  });      
     
+});
     
     
     
@@ -35,35 +77,12 @@ window.addEventListener("load", function() {
      
   
 
-      // if(pilotName.value === ""|| copilotName.value === ""){
-      //   console.log(copilotName);
-      // }
-      //   if(fuelLevel.value === Number || cargoMass.value === Number){
-      //    console.log(fuelLevel);
       
-      //  }
-        // else {
-        //     alert("All fields are required!");
-        //           event.preventDefault();
       
 
       
-      
-      let faultyItems = document.getElementById("faultyItems")
-      
-      
-      
-      if(fuelLevel.value < 10000){
-            faultyItems.style.color = "red";
-            faultyItems.style.visibility = "visible";
-         fuelStatus.innerHTML = "There is not enough fuel for the journey";
-         launchStatus.innerHTML = "Shuttle not ready for launch";
-        };    
 
-      
-    });
-    });
-  });
+  
    
 
    
