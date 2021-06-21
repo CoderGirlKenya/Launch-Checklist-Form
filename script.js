@@ -39,11 +39,8 @@ window.addEventListener("load", function() {
     }
      else if (isNaN(pilotName.value)=== false ){
       // copilotStatus.innerHTML = "Co-Pilot is not ready";
-      // pilotStatus.innerHTML = "Pilot is not ready";
-      // faultyItems.style.visibility= "visible";
       alert("Pilot should be a name(string)");
-        
-          console.log(isNaN(pilotName.value));
+              console.log(isNaN(pilotName.value));
       } 
       else if (isNaN(copilotName.value) === false){
         alert("Co-pilot should be a name(string)");
@@ -58,10 +55,21 @@ window.addEventListener("load", function() {
     changes();
     
     function changes(){
+      if (isNaN(pilotName.value) === true){
+        pilotStatus.innerHTML = `Pilot ${pilotName.value} is ready`;
+      faultyItems.style.visibility= "visible";
+      } 
+      else {
+        pilotStatus.innerHTML = "Pilot is not ready";
+      faultyItems.style.visibility= "visible";
+      }
+      
+         if (isNaN(copilotName.value) === false ){
+              copilotStatus.innerHTML = "Co-Pilot is not ready";
+            } else {
+              copilotStatus.innerHTML = `Co-Pilot ${copilotName.value} is ready`;
+            }
           if (fuelLevel.value < 10000){
-            pilotStatus.innerHTML = `Pilot ${pilotName.value} is ready`;
-          copilotStatus.innerHTML = `Co-Pilot ${copilotName.value} is ready`;
-           //faultyItems.style.color = "red";
             faultyItems.style.visibility = "visible";
          fuelStatus.innerHTML = "There is not enough fuel for the journey";
          launchStatus.innerHTML = "Shuttle not ready for launch";
@@ -82,8 +90,8 @@ window.addEventListener("load", function() {
           cargoStatus.innerHTML = "Cargo mass low enough for launch";
           fuelStatus.innerHTML = "Fuel level high enough for launch";
           faultyItems.style.visibility = "visible";
-          pilotStatus.innerHTML = `Pilot ${pilotName.value} is ready`;
-          copilotStatus.innerHTML = `Co-Pilot ${copilotName.value} is ready`;
+          //pilotStatus.innerHTML = `Pilot ${pilotName.value} is ready`;
+          //copilotStatus.innerHTML = `Co-Pilot ${copilotName.value} is ready`;
             }
     };      
   });      
