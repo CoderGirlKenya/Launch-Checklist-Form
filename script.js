@@ -35,8 +35,10 @@ window.addEventListener("load", function() {
     let cargoStatus = document.getElementById("cargoStatus");
     let fuelStatus = document.getElementById("fuelStatus");
     let faultyItems = document.getElementById("faultyItems")
+    let launchStatusCheck = document.getElementById("launchStatusCheck");
     if (pilotName.value === "" || copilotName.value === ""||fuelLevel.value=== ""|| cargoMass.value === ""){
     alert("all fields are required")
+  
     }
      else if (isNaN(pilotName.value)=== false ){
       // copilotStatus.innerHTML = "Co-Pilot is not ready";
@@ -54,8 +56,16 @@ window.addEventListener("load", function() {
         }
 
     changes();
-    
+     
     function changes(){
+    if ((pilotName.value === "" || copilotName.value === ""||fuelLevel.value=== ""|| cargoMass.value === "")){
+      launchStatus.innerHTML = "Shuttle not ready for launch";
+      launchStatus.style.color = "red";
+       } else {
+         launchStatus.innerHTML = "Shuttle is ready to launch"
+         launchStatus.style.color = " green";
+       }
+
       if (isNaN(pilotName.value) === true){
         pilotStatus.innerHTML = `Pilot ${pilotName.value} is ready`;
       faultyItems.style.visibility= "visible";
@@ -63,10 +73,12 @@ window.addEventListener("load", function() {
       else {
         pilotStatus.innerHTML = "Pilot is not ready";
       faultyItems.style.visibility= "visible";
+      //launchStatusCheck.innerHTML = "Shuttle not ready for launch";
       }
       
          if (isNaN(copilotName.value) === false ){
               copilotStatus.innerHTML = "Co-Pilot is not ready";
+             launchStatus.innerHTML = "Shuttle not ready for launch";
             } else {
               copilotStatus.innerHTML = `Co-Pilot ${copilotName.value} is ready`;
             }
@@ -81,13 +93,13 @@ window.addEventListener("load", function() {
           faultyItems.style.visibility = "visible";
           cargoStatus.innerHTML = "There is too much mass for the shuttle to take off";
           launchStatus.innerHTML = "Shuttle not ready for launch";
-          launchStatus.style.color = "red";
+           launchStatus.style.color = "red";
             //faultyItems.style.color = "red";
            }
            
              else if (fuelLevel.value >= 10000 && cargoMass.value < 10000) {
-          launchStatus.style.color = " green";
-          launchStatus.innerHTML = "Shuttle is ready for launch";
+          
+          //launchStatus.innerHTML = "Shuttle is ready for launch";
           cargoStatus.innerHTML = "Cargo mass low enough for launch";
           fuelStatus.innerHTML = "Fuel level high enough for launch";
           faultyItems.style.visibility = "visible";
