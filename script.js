@@ -85,7 +85,7 @@ window.addEventListener("load", function() {
             } else {
               copilotStatus.innerHTML = `Co-Pilot ${copilotName.value} is ready`;
             }
-            if (fuelLevel.value < 10000){
+            if (fuelLevel.value < 10000 || isNaN(fuelLevel.value) === true){
             faultyItems.style.visibility = "visible";
          fuelStatus.innerHTML = "There is not enough fuel for the journey";
          launchStatus.innerHTML = "Shuttle not ready for launch";
